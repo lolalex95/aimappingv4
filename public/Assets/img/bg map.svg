@@ -1,0 +1,141 @@
+<svg id="map-svg" class="w-full h-full block" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden;">
+      <defs>
+        <!-- Máscara de recorte estricta 16:9 para evitar que cualquier línea sobresalga -->
+        <clipPath id="boundary-clip">
+          <rect x="0" y="0" width="1920" height="1080"></rect>
+        </clipPath>
+
+        <!-- Fondo base: degradado general claro -->
+        <linearGradient id="base-gradient" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#E2E8F4"></stop>
+          <stop offset="35%" stop-color="#E7E5F6"></stop>
+          <stop offset="70%" stop-color="#F2F4F8"></stop>
+          <stop offset="100%" stop-color="#EEF7EE"></stop>
+        </linearGradient>
+
+        <!-- Mancha violeta superior-centro -->
+        <radialGradient id="purple-glow" cx="45%" cy="20%" r="50%" fx="42%" fy="15%">
+          <stop offset="0%" stop-color="#B8B2E8" stop-opacity="0.95"></stop>
+          <stop offset="45%" stop-color="#CBC6F0" stop-opacity="0.6"></stop>
+          <stop offset="85%" stop-color="#DFDCF5" stop-opacity="0.15"></stop>
+          <stop offset="100%" stop-color="#DFDCF5" stop-opacity="0"></stop>
+        </radialGradient>
+
+        <!-- Mancha menta / verde inferior izquierda -->
+        <radialGradient id="mint-glow-left" cx="5%" cy="85%" r="45%">
+          <stop offset="0%" stop-color="#CBE9DE" stop-opacity="0.85"></stop>
+          <stop offset="60%" stop-color="#DDF2EA" stop-opacity="0.35"></stop>
+          <stop offset="100%" stop-color="#DDF2EA" stop-opacity="0"></stop>
+        </radialGradient>
+
+        <!-- Mancha verde clara derecha -->
+        <radialGradient id="green-glow-right" cx="95%" cy="65%" r="45%">
+          <stop offset="0%" stop-color="#DCF6DE" stop-opacity="0.9"></stop>
+          <stop offset="55%" stop-color="#E9FAEA" stop-opacity="0.4"></stop>
+          <stop offset="100%" stop-color="#E9FAEA" stop-opacity="0"></stop>
+        </radialGradient>
+
+        <!-- Degradado para cinta verde curvada principal -->
+        <linearGradient id="ribbon-green-1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#B5E0C2" stop-opacity="0.5"></stop>
+          <stop offset="30%" stop-color="#AEE1B8" stop-opacity="0.75"></stop>
+          <stop offset="75%" stop-color="#BFEDB7" stop-opacity="0.7"></stop>
+          <stop offset="100%" stop-color="#C5ECC3" stop-opacity="0.4"></stop>
+        </linearGradient>
+
+        <!-- Degradado para cinta verde curvada secundaria -->
+        <linearGradient id="ribbon-green-2" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="#BDE6C3" stop-opacity="0.75"></stop>
+          <stop offset="50%" stop-color="#C9EFC9" stop-opacity="0.8"></stop>
+          <stop offset="100%" stop-color="#D3F5C7" stop-opacity="0.5"></stop>
+        </linearGradient>
+
+        <!-- Degradado para la ruta naranja/dorada -->
+        <linearGradient id="yellow-road" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FCD5A3" stop-opacity="0.55"></stop>
+          <stop offset="40%" stop-color="#FDDCB0" stop-opacity="0.85"></stop>
+          <stop offset="70%" stop-color="#FFE7C4" stop-opacity="0.8"></stop>
+          <stop offset="100%" stop-color="#FFEED2" stop-opacity="0.4"></stop>
+        </linearGradient>
+
+        <!-- Filtro para desenfoque suave atmosférico -->
+        <filter id="soft-blur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="35"></feGaussianBlur>
+        </filter>
+      </defs>
+
+      <!-- Contenedor general recortado estrictamente al marco 16:9 -->
+      <g clip-path="url(#boundary-clip)">
+        <!-- Base sólida con gradiente -->
+        <rect width="1920" height="1080" fill="url(#base-gradient)"></rect>
+
+        <!-- Manchas difusas de color ambiental -->
+        <rect width="1920" height="1080" fill="url(#purple-glow)"></rect>
+        <rect width="1920" height="1080" fill="url(#mint-glow-left)"></rect>
+        <rect width="1920" height="1080" fill="url(#green-glow-right)"></rect>
+
+        <!-- Zonas verdes de parques y parcelas urbanas -->
+        <g id="land-parcels" opacity="0.6">
+          <!-- Manzana verde central derecha (Parque grande facetado) -->
+          <polygon points="1090,410 1340,405 1370,470 1590,445 1595,640 1530,645 1520,705 1320,710 1315,640 1120,635 1085,550" fill="#BFE3CA" fill-opacity="0.5"></polygon>
+          <polygon points="1090,670 1320,675 1370,740 1325,830 1145,825 1080,750" fill="#CFEED8" fill-opacity="0.55"></polygon>
+          <polygon points="1605,475 1785,490 1765,690 1600,670" fill="#D2F0DA" fill-opacity="0.4"></polygon>
+          <polygon points="1600,720 1715,730 1880,920 1710,990 1610,790" fill="#DCF7E0" fill-opacity="0.45"></polygon>
+          
+          <!-- Parcelas violetas / grises superiores -->
+          <polygon points="630,70 940,30 1080,150 780,180" fill="#CAC5EE" fill-opacity="0.35"></polygon>
+          <polygon points="770,195 1080,165 1060,320 780,335" fill="#BFB8E7" fill-opacity="0.4"></polygon>
+          <polygon points="490,160 740,140 760,350 560,335" fill="#CCC7EE" fill-opacity="0.45"></polygon>
+          <polygon points="785,350 1060,335 1060,490 790,495" fill="#BFB8E7" fill-opacity="0.5"></polygon>
+          
+          <!-- Parcelas inferiores izquierda -->
+          <polygon points="80,680 340,610 395,780 145,860" fill="#CDE9DD" fill-opacity="0.35"></polygon>
+          <polygon points="20,440 280,380 330,520 70,580" fill="#D6E8ED" fill-opacity="0.3"></polygon>
+          <polygon points="650,710 820,705 840,845 680,845" fill="#E4F0EE" fill-opacity="0.6"></polygon>
+        </g>
+
+        <!-- Red vial y calles primarias / secundarias en blanco traslúcido -->
+        <g id="street-grid">
+          <!-- Calles diagonales y menores -->
+          <path d="M0,200 L1920,-80" stroke="#FFFFFF" stroke-width="5" stroke-opacity="0.45"></path>
+          <path d="M0,370 L1920,100" stroke="#FFFFFF" stroke-width="6" stroke-opacity="0.5"></path>
+          <path d="M0,570 L1920,450" stroke="#FFFFFF" stroke-width="7" stroke-opacity="0.65"></path>
+          <path d="M0,770 L1920,780" stroke="#FFFFFF" stroke-width="6" stroke-opacity="0.5"></path>
+          <path d="M0,950 L1920,1020" stroke="#FFFFFF" stroke-width="5" stroke-opacity="0.4"></path>
+
+          <!-- Calles transversales suaves -->
+          <path d="M480,0 L720,1080" stroke="#FFFFFF" stroke-width="7" stroke-opacity="0.55"></path>
+          <path d="M780,0 L640,360 L780,1080" stroke="#FFFFFF" stroke-width="8" stroke-opacity="0.6"></path>
+          <path d="M1070,0 L1030,550 L1070,1080" stroke="#FFFFFF" stroke-width="12" stroke-opacity="0.75"></path>
+          <path d="M1380,0 L1340,380 L1370,1080" stroke="#FFFFFF" stroke-width="16" stroke-opacity="0.8"></path>
+          <path d="M1600,0 L1600,680 L1740,1080" stroke="#FFFFFF" stroke-width="14" stroke-opacity="0.75"></path>
+          <path d="M1820,0 L1880,1080" stroke="#FFFFFF" stroke-width="8" stroke-opacity="0.5"></path>
+
+          <!-- Autopistas y avenidas conectoras más anchas -->
+          <path d="M0,170 C 400,280 800,220 1200,80 L 1920,0" stroke="#FFFFFF" stroke-width="18" stroke-opacity="0.6"></path>
+          <path d="M0,720 C 350,660 750,760 1150,740 C 1550,720 1750,880 1920,915" stroke="#FFFFFF" stroke-width="22" stroke-opacity="0.7"></path>
+          <path d="M260,0 C 340,300 370,600 700,1080" stroke="#FFFFFF" stroke-width="20" stroke-opacity="0.65"></path>
+        </g>
+
+        <!-- Autopista dorada / naranja suave diagonal -->
+        <g id="yellow-artery">
+          <path d="M 330,0 L 510,430 L 730,550 L 1170,860 L 1460,980 L 1920,980" stroke="url(#yellow-road)" stroke-width="13" stroke-linejoin="round"></path>
+        </g>
+
+        <!-- Cinta curvada verde pastel superior-media -->
+        <g id="green-ribbon-upper">
+          <path d="M 0,510 C 320,440 680,270 1200,240 C 1560,220 1780,280 1920,315" stroke="url(#ribbon-green-1)" stroke-width="24" fill="none"></path>
+        </g>
+
+        <!-- Cinta curvada verde pastel sinuosa izquierda-inferior -->
+        <g id="green-ribbon-lower">
+          <path d="M 180,0 C 230,220 350,580 500,840 C 560,940 640,1050 670,1080" stroke="url(#ribbon-green-2)" stroke-width="22" fill="none"></path>
+          <path d="M 350,830 C 580,870 950,860 1250,1080" stroke="url(#ribbon-green-2)" stroke-width="18" fill="none"></path>
+        </g>
+
+        <!-- Capa de brillo central y degradado de fusión -->
+        <ellipse cx="960" cy="540" rx="900" ry="500" fill="#FFFFFF" fill-opacity="0.18"></ellipse>
+        <circle cx="1080" cy="850" r="450" fill="#FFFFFF" fill-opacity="0.25" filter="url(#soft-blur)"></circle>
+        <rect width="1920" height="1080" fill="url(#purple-glow)" opacity="0.35" style="mix-blend-mode: soft-light;"></rect>
+      </g>
+    </svg>
