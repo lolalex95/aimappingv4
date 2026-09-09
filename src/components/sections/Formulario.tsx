@@ -9,6 +9,7 @@ export const Formulario: React.FC = () => {
   const [formData, setFormData] = useState({
     nombreCompleto: '',
     empresa: '',
+    telefono: '',
     email: '',
     sector: '',
     necesidad: '',
@@ -124,6 +125,7 @@ export const Formulario: React.FC = () => {
                       setFormData({
                         nombreCompleto: '',
                         empresa: '',
+                        telefono: '',
                         email: '',
                         sector: '',
                         necesidad: '',
@@ -175,21 +177,37 @@ export const Formulario: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Row 2: Email corporativo */}
-                  <div>
-                    <label htmlFor="form-email" className="block text-sm font-semibold text-slate-300 mb-1.5">
-                      {t.formulario.emailField}
-                    </label>
-                    <input
-                      id="form-email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder={t.formulario.emailPlaceholder}
-                      className="w-full px-4 py-3 rounded-xl bg-[#192233] border border-white/10 focus:border-[#3CB4A3] focus:ring-2 focus:ring-[#3CB4A3]/20 text-sm text-white placeholder:text-slate-500 outline-none transition-all"
-                    />
-                  </div>
+                    {/* Row 2: Teléfono & Email corporativo */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div>
+                        <label htmlFor="form-telefono" className="block text-sm font-semibold text-slate-300 mb-1.5">
+                          {t.formulario.phoneField}
+                        </label>
+                        <input
+                          id="form-telefono"
+                          type="tel"
+                          value={formData.telefono}
+                          onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+                          placeholder={t.formulario.phonePlaceholder}
+                          className="w-full px-4 py-3 rounded-xl bg-[#192233] border border-white/10 focus:border-[#3CB4A3] focus:ring-2 focus:ring-[#3CB4A3]/20 text-sm text-white placeholder:text-slate-500 outline-none transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label htmlFor="form-email" className="block text-sm font-semibold text-slate-300 mb-1.5">
+                          {t.formulario.emailField}
+                        </label>
+                        <input
+                          id="form-email"
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder={t.formulario.emailPlaceholder}
+                          className="w-full px-4 py-3 rounded-xl bg-[#192233] border border-white/10 focus:border-[#3CB4A3] focus:ring-2 focus:ring-[#3CB4A3]/20 text-sm text-white placeholder:text-slate-500 outline-none transition-all"
+                        />
+                      </div>
+                    </div>
 
                   {/* Row 3: Sector de infraestructura */}
                   <div>
