@@ -1,40 +1,48 @@
 import React from 'react';
 import { Badge } from '../ui/Badge';
-import { CheckCircle, Users2, Workflow, TrendingDown } from 'lucide-react';
+import { Zap, ShieldCheck, Database, Users2, FileCheck, TrendingDown } from 'lucide-react';
 
 export const Beneficios: React.FC = () => {
   const benefits = [
     {
-      title: 'Menos verificaciones',
-      description: 'La información relevada reduce la necesidad de nuevos controles y revisiones en campo.',
-      icon: CheckCircle,
+      title: 'Relevamientos más ágiles',
+      icon: Zap,
       accentColor: '#3CB4A3',
       bgAccent: 'bg-[#3CB4A3]/10',
       textColor: 'text-[#3CB4A3]',
+      borderColor: 'border-[#3CB4A3]/30',
     },
     {
-      title: 'Mayor consistencia entre equipos',
-      description: 'GIS, operaciones, mantenimiento, planificación y despliegue pueden trabajar sobre una misma referencia.',
+      title: 'Menos controles en campo',
+      icon: ShieldCheck,
+      accentColor: '#4F56A1',
+      bgAccent: 'bg-[#4F56A1]/10',
+      textColor: 'text-[#4F56A1]',
+      borderColor: 'border-[#4F56A1]/30',
+    },
+    {
+      title: 'Datos más confiables',
+      icon: Database,
+      accentColor: '#3CB4A3',
+      bgAccent: 'bg-[#3CB4A3]/10',
+      textColor: 'text-[#3CB4A3]',
+      borderColor: 'border-[#3CB4A3]/30',
+    },
+    {
+      title: 'Equipos mejor coordinados',
       icon: Users2,
       accentColor: '#4F56A1',
       bgAccent: 'bg-[#4F56A1]/10',
       textColor: 'text-[#4F56A1]',
+      borderColor: 'border-[#4F56A1]/30',
     },
     {
       title: 'Información lista para usar',
-      description: 'Los resultados se entregan para integrarse a las herramientas y procesos de la organización.',
-      icon: Workflow,
+      icon: FileCheck,
       accentColor: '#3CB4A3',
       bgAccent: 'bg-[#3CB4A3]/10',
       textColor: 'text-[#3CB4A3]',
-    },
-    {
-      title: 'Menor costo operativo',
-      description: 'Aprovecha mejor el tiempo y los recursos del equipo.',
-      icon: TrendingDown,
-      accentColor: '#4F56A1',
-      bgAccent: 'bg-[#4F56A1]/10',
-      textColor: 'text-[#4F56A1]',
+      borderColor: 'border-[#3CB4A3]/30',
     },
   ];
 
@@ -52,40 +60,49 @@ export const Beneficios: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          {/* Label: BENEFICIOS */}
           <div className="mb-3 inline-block">
             <Badge variant="secondary">BENEFICIOS</Badge>
           </div>
-
-          {/* Title: Más claridad para decidir, planificar y operar. */}
           <h2 className="text-2xl sm:text-4xl font-extrabold text-[#4F5051] tracking-tight leading-tight">
-            Más claridad para decidir, planificar y operar.
+            Más eficiencia para decidir, planificar y operar.
           </h2>
         </div>
 
-        {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* 5 Benefits Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-12">
           {benefits.map((item) => {
             const Icon = item.icon;
             return (
               <div
                 key={item.title}
-                className="gis-card p-8 rounded-2xl bg-white border border-slate-200 flex flex-col sm:flex-row items-start gap-6 group hover:-translate-y-1 transition-all duration-300"
+                className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center text-center hover:-translate-y-1 transition-all duration-300"
               >
-                <div className={`p-4 rounded-2xl ${item.bgAccent} ${item.textColor} flex-shrink-0 group-hover:scale-110 transition-transform`}>
-                  <Icon className="w-8 h-8" />
+                <div className={`w-14 h-14 rounded-full border ${item.borderColor} ${item.bgAccent} ${item.textColor} flex items-center justify-center mb-4 shadow-sm`}>
+                  <Icon className="w-6 h-6 stroke-[2]" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#4F5051] mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-base text-slate-600 leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
+                <h3 className="text-base font-bold text-[#4F5051] leading-snug">
+                  {item.title}
+                </h3>
               </div>
             );
           })}
+        </div>
+
+        {/* Result Card */}
+        <div className="w-full relative rounded-2xl sm:rounded-3xl p-8 sm:p-10 text-center bg-gradient-to-r from-[#3CB4A3]/10 via-white to-[#4F56A1]/10 border border-[#3CB4A3]/25 shadow-sm overflow-hidden">
+          <div className="relative z-10 flex flex-col items-center justify-center">
+            <span className="inline-block text-xs sm:text-sm font-bold tracking-widest text-[#3CB4A3] uppercase mb-2">
+              RESULTADO
+            </span>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-[#3CB4A3]/15 text-[#3CB4A3] flex items-center justify-center border border-[#3CB4A3]/30">
+                <TrendingDown className="w-6 h-6 stroke-[2.2]" />
+              </div>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#4F5051] tracking-tight">
+                Menor costo operativo
+              </h3>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -76,14 +76,9 @@ export const PuntoPartida: React.FC = () => {
         {/* Section Header Centered & Full Width */}
         <div data-reveal="fade-up" className="w-full text-center mb-12">
           {/* Title: La infraestructura cambia. La información no siempre se actualiza al mismo ritmo. */}
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#4F5051] tracking-tight leading-tight mb-4 max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#4F5051] tracking-tight leading-tight max-w-4xl mx-auto">
             La infraestructura cambia. La información no siempre se actualiza al mismo ritmo.
           </h2>
-
-          {/* Subtitle: Cuando los registros no reflejan lo que existe, mantener la información actualizada puede requerir más verificaciones, recorridos y recursos. */}
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
-            Cuando los registros no reflejan lo que existe, mantener la información actualizada puede requerir más verificaciones, recorridos y recursos.
-          </p>
         </div>
 
         {/* 3 Impact Cards */}
@@ -96,13 +91,13 @@ export const PuntoPartida: React.FC = () => {
             <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-4">
               <AlertCircle className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold text-[#4F5051] mb-2">Más verificaciones</h3>
+            <h3 className="text-lg font-bold text-[#4F5051] mb-2">Más recorridos y controles</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Hay que comprobar si lo registrado coincide con lo que existe.
+              Hay que volver al campo para verificar qué cambió.
             </p>
           </div>
 
-          {/* Card 2: Más tiempo */}
+          {/* Card 2: Más tiempo y revisiones */}
           <div
             data-reveal="fade-up"
             className="gis-card p-6 rounded-2xl bg-white border border-slate-200 delay-200"
@@ -110,9 +105,9 @@ export const PuntoPartida: React.FC = () => {
             <div className="w-10 h-10 rounded-xl bg-[#4F56A1]/10 text-[#4F56A1] flex items-center justify-center mb-4">
               <Clock className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold text-[#4F5051] mb-2">Más tiempo</h3>
+            <h3 className="text-lg font-bold text-[#4F5051] mb-2">Más tiempo y revisiones</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Las revisiones y recorridos pueden llevar más tiempo del equipo.
+              Relevar manualmente lleva más tiempo y aumenta el riesgo de errores.
             </p>
           </div>
 
@@ -126,7 +121,7 @@ export const PuntoPartida: React.FC = () => {
             </div>
             <h3 className="text-lg font-bold text-[#4F5051] mb-2">Mayor costo operativo</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Más recorridos y revisiones requieren más recursos.
+              Más recorridos y horas de trabajo aumentan los costos.
             </p>
           </div>
         </div>

@@ -1,74 +1,64 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  AlertCircle,
+  MapPinCheck,
   Clock,
-  SplitSquareVertical,
-  TrendingDown,
-  AlertTriangle,
+  CircleDollarSign,
 } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface CarouselItem {
   id: number;
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties; strokeWidth?: number | string }>;
-  text: string;
+  title: string;
+  subtitle: string;
   brandColor: string;
   ringColor: string;
   bgSoft: string;
 }
 
-const ITEMS: CarouselItem[] = [
-  {
-    id: 1,
-    icon: AlertCircle,
-    text: 'Múltiples problemas/riesgos para los operarios en la vía pública',
-    brandColor: '#3CB4A3', // AiMapping Turquoise
-    ringColor: 'rgba(60, 180, 163, 0.25)',
-    bgSoft: 'rgba(60, 180, 163, 0.12)',
-  },
-  {
-    id: 2,
-    icon: AlertTriangle,
-    text: 'Recabar información manualmente es propenso a error',
-    brandColor: '#4288A3', // Intermediate cyan
-    ringColor: 'rgba(66, 136, 163, 0.25)',
-    bgSoft: 'rgba(66, 136, 163, 0.12)',
-  },
-  {
-    id: 3,
-    icon: Clock,
-    text: 'Proceso lento',
-    brandColor: '#4F56A1', // AiMapping Indigo
-    ringColor: 'rgba(79, 86, 161, 0.25)',
-    bgSoft: 'rgba(79, 86, 161, 0.12)',
-  },
-  {
-    id: 4,
-    icon: SplitSquareVertical,
-    text: 'Altos costos operativos',
-    brandColor: '#E15B64', // Warm brand Coral
-    ringColor: 'rgba(225, 91, 100, 0.25)',
-    bgSoft: 'rgba(225, 91, 100, 0.12)',
-  },
-  {
-    id: 5,
-    icon: TrendingDown,
-    text: 'Menor Productividad',
-    brandColor: '#7A529B', // Deep Violet / Purple
-    ringColor: 'rgba(122, 82, 155, 0.25)',
-    bgSoft: 'rgba(122, 82, 155, 0.12)',
-  },
-];
-
 export const SemicircleCarousel: React.FC = () => {
+  const { t } = useLanguage();
   const [activeStep, setActiveStep] = useState(0);
   const [animProgress, setAnimProgress] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const items: CarouselItem[] = [
+    {
+      id: 1,
+      icon: MapPinCheck,
+      title: t.puntoPartida.node1Title,
+      subtitle: t.puntoPartida.node1Desc,
+      brandColor: '#3CB4A3', // AiMapping Turquoise
+      ringColor: 'rgba(60, 180, 163, 0.25)',
+      bgSoft: 'rgba(60, 180, 163, 0.12)',
+    },
+    {
+      id: 2,
+      icon: Clock,
+      title: t.puntoPartida.node2Title,
+      subtitle: t.puntoPartida.node2Desc,
+      brandColor: '#4F56A1', // AiMapping Indigo
+      ringColor: 'rgba(79, 86, 161, 0.25)',
+      bgSoft: 'rgba(79, 86, 161, 0.12)',
+    },
+    {
+      id: 3,
+      icon: CircleDollarSign,
+      title: t.puntoPartida.node3Title,
+      subtitle: t.puntoPartida.node3Desc,
+      brandColor: '#E15B64', // Warm brand Coral
+      ringColor: 'rgba(225, 91, 100, 0.25)',
+      bgSoft: 'rgba(225, 91, 100, 0.12)',
+    },
+  ];
+
+  const total = items.length;
 
   const activeStepRef = useRef(0);
   activeStepRef.current = activeStep;
   const pathRef = useRef<SVGPathElement>(null);
 
-  // Auto-advance loop every 3.6s with ~1050ms transition
+  // Auto-advance loop every 3.8s with ~1050ms transition
   useEffect(() => {
     let animationFrameId: number;
     let startTime: number | null = null;
@@ -80,7 +70,7 @@ export const SemicircleCarousel: React.FC = () => {
 
     const interval = setInterval(() => {
       const fromStep = activeStepRef.current;
-      const toStep = (fromStep + 1) % ITEMS.length;
+      const toStep = (fromStep + 1) % total;
       setIsTransitioning(true);
       startTime = null;
 
@@ -102,18 +92,15 @@ export const SemicircleCarousel: React.FC = () => {
       };
 
       animationFrameId = requestAnimationFrame(stepAnimation);
-    }, 3600);
+    }, 3800);
 
     return () => {
       clearInterval(interval);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
-
-  const total = ITEMS.length;
+  }, [total]);
 
   // Function to evaluate exact point on the SVG path directly via getPointAtLength!
-  // This guarantees 100.00% precision: icons can NEVER deviate or float off the line.
   const getNodePosition = (slotPos: number) => {
     const path = pathRef.current;
     if (!path) {
@@ -124,9 +111,9 @@ export const SemicircleCarousel: React.FC = () => {
 
     const totalLength = path.getTotalLength();
     // slotPos ranges from 0 (entry left) to 4 (exit right)
-    // Left slot (1): ~17% of path length
+    // Left slot (1): 25% of path length
     // Center Apex (2): 50% of path length (Apex of semicircle!)
-    // Right slot (3): ~83% of path length
+    // Right slot (3): 75% of path length
     const t = Math.max(0, Math.min(4, slotPos)) / 4;
     const lengthAlongPath = t * totalLength;
     const pt = path.getPointAtLength(lengthAlongPath);
@@ -183,11 +170,11 @@ export const SemicircleCarousel: React.FC = () => {
           />
         </svg>
 
-        {/* 2. NODES: Render all 5 items centered directly ON the SVG curve */}
-        {ITEMS.map((item, index) => {
+        {/* 2. NODES: Render 3 items centered directly ON the SVG curve */}
+        {items.map((item, index) => {
           let offset = (index - animProgress) % total;
-          if (offset < -2.5) offset += total;
-          if (offset > 2.5) offset -= total;
+          if (offset < -total / 2) offset += total;
+          if (offset > total / 2) offset -= total;
 
           const slotPos = offset + 2;
 
@@ -200,15 +187,15 @@ export const SemicircleCarousel: React.FC = () => {
           const distToApex = Math.abs(slotPos - 2);
           const isApexActive = distToApex < 0.25;
 
-          // Scale: Center is 1.15, sides are 0.90, outer is 0.65
+          // Scale: Center is 1.15, sides are 0.92, outer is 0.65
           const scale = Math.max(0.65, 1.15 - distToApex * 0.22);
 
-          // Opacity: Center & sides visible; fade to 0 when sliding outside
+          // Opacity: Center & sides visible; smooth fade when sliding outside
           let opacity = 0;
-          if (distToApex <= 1.25) {
+          if (distToApex <= 1.1) {
             opacity = 1;
-          } else if (distToApex < 1.85) {
-            opacity = Math.max(0, 1 - (distToApex - 1.25) / 0.6);
+          } else if (distToApex < 1.6) {
+            opacity = Math.max(0, 1 - (distToApex - 1.1) / 0.5);
           }
 
           const IconComponent = item.icon;
@@ -287,25 +274,27 @@ export const SemicircleCarousel: React.FC = () => {
         })}
       </div>
 
-      {/* 3. Text container immediately below the center apex */}
-      <div className="relative w-full max-w-xl mx-auto -mt-4 sm:-mt-8 text-center min-h-[52px] sm:min-h-[60px] flex items-center justify-center px-4 z-20">
-        {ITEMS.map((item, index) => {
+      {/* 3. Text container immediately below the center apex: Title + Subtitle */}
+      <div className="relative w-full max-w-xl mx-auto -mt-3 sm:-mt-6 text-center min-h-[72px] sm:min-h-[80px] flex items-center justify-center px-4 z-20">
+        {items.map((item, index) => {
           const isCurrent = index === activeStep;
           return (
             <div
               key={item.id}
-              className={`absolute w-full transition-all duration-500 ease-out flex items-center justify-center ${
+              className={`absolute w-full flex flex-col items-center justify-center transition-all duration-500 ease-out ${
                 isCurrent
                   ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
                   : 'opacity-0 translate-y-2 scale-98 pointer-events-none'
               }`}
             >
-              <h3
-                className="text-base sm:text-xl font-bold tracking-tight leading-snug max-w-lg mx-auto"
-                style={{ color: '#4F5051' }}
-              >
-                {item.text}
+              {/* Title */}
+              <h3 className="text-lg sm:text-2xl font-bold text-[#4F5051] tracking-tight leading-snug mb-1 sm:mb-1.5">
+                {item.title}
               </h3>
+              {/* Subtitle */}
+              <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-md mx-auto">
+                {item.subtitle}
+              </p>
             </div>
           );
         })}

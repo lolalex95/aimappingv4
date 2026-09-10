@@ -83,16 +83,11 @@ export const PuntoPartidaVariant: React.FC = () => {
       <div className="w-full max-w-[86vw] 2xl:max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
         
         {/* Section Header Centered & Full Width */}
-        <div data-reveal="fade-up" className="w-full text-center mb-16 sm:mb-20">
+        <div data-reveal="fade-up" className="w-full text-center mb-12 sm:mb-16">
           {/* Title */}
-          <h2 className="text-2xl sm:text-4xl font-semibold text-[#4F5051] tracking-tight leading-tight mb-4 max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-4xl font-semibold text-[#4F5051] tracking-tight leading-tight max-w-4xl mx-auto">
             {t.puntoPartida.title}
           </h2>
-
-          {/* Subtitle */}
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto font-normal">
-            {t.puntoPartida.subtitle}
-          </p>
         </div>
 
         {/* Animated 5-node curved carousel */}

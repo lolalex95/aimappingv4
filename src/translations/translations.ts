@@ -21,14 +21,14 @@ export const translations = {
         'La infraestructura cambia. La información no siempre se actualiza al mismo ritmo',
       subtitle:
         'Cuando los registros no reflejan lo que existe, mantener la información actualizada puede requerir más verificaciones, recorridos y recursos.',
-      node1Title: 'Más verificaciones',
+      node1Title: 'Más recorridos y controles',
       node1Desc:
-        'Hay que comprobar si lo registrado coincide con lo que existe.',
-      node2Title: 'Más tiempo',
+        'Hay que volver al campo para verificar qué cambió.',
+      node2Title: 'Más tiempo y revisiones',
       node2Desc:
-        'Las revisiones y recorridos pueden llevar más tiempo del equipo.',
+        'Relevar manualmente lleva más tiempo y aumenta el riesgo de errores.',
       node3Title: 'Mayor costo operativo',
-      node3Desc: 'Más recorridos y revisiones requieren más recursos.',
+      node3Desc: 'Más recorridos y horas de trabajo aumentan los costos.',
       sliderTitle: 'Lo registrado puede dejar de reflejar lo que existe',
       sliderSubtitle:
         'Detectar esos cambios ayuda a mantener la información actualizada.',
@@ -79,19 +79,14 @@ export const translations = {
       compatibleFormats: 'Formatos compatibles:',
     },
     beneficios: {
-      title: 'Más claridad para decidir, planificar y operar',
-      benefit1Title: 'Menos verificaciones',
-      benefit1Desc:
-        'La información relevada reduce la necesidad de nuevos controles y revisiones en campo.',
-      benefit2Title: 'Mayor consistencia entre equipos',
-      benefit2Desc:
-        'GIS, operaciones, mantenimiento, planificación y despliegue pueden trabajar sobre una misma referencia.',
-      benefit3Title: 'Información lista para usar',
-      benefit3Desc:
-        'Los resultados se entregan para integrarse a las herramientas y procesos de la organización.',
+      title: 'Más eficiencia para decidir, planificar y operar',
+      benefit1: 'Relevamientos más ágiles',
+      benefit2: 'Menos controles en campo',
+      benefit3: 'Datos más confiables',
+      benefit4: 'Equipos mejor coordinados',
+      benefit5: 'Información lista para usar',
       resultBadge: 'RESULTADO',
       resultTitle: 'Menor costo operativo',
-      resultDesc: 'Aprovecha mejor el tiempo y los recursos del equipo.',
     },
     ctaBanner: {
       title: '¿Quieres reducir el costo de tus relevamientos?',
@@ -198,14 +193,14 @@ export const translations = {
         'Infrastructure changes. Information does not always update at the same pace',
       subtitle:
         'When records do not reflect reality, keeping data up to date requires more inspections, field trips, and resources.',
-      node1Title: 'More verifications',
+      node1Title: 'More field trips and checks',
       node1Desc:
-        'Field checks are needed to see if registered data matches reality.',
-      node2Title: 'More time',
+        'You have to go back to the field to verify what changed.',
+      node2Title: 'More time and revisions',
       node2Desc:
-        'Inspections and surveys consume valuable team hours.',
+        'Surveying manually takes more time and increases the risk of errors.',
       node3Title: 'Higher operating cost',
-      node3Desc: 'More site visits and audits require more budget.',
+      node3Desc: 'More field trips and labor hours increase operating costs.',
       sliderTitle: 'Registered records can quickly stop reflecting reality',
       sliderSubtitle:
         'Detecting those changes helps keep your geospatial database up to date.',
@@ -256,19 +251,14 @@ export const translations = {
       compatibleFormats: 'Compatible formats:',
     },
     beneficios: {
-      title: 'Greater clarity to decide, plan, and operate',
-      benefit1Title: 'Fewer verifications',
-      benefit1Desc:
-        'Surveyed intelligence drastically reduces manual visual review of images.',
-      benefit2Title: 'Consistency across teams',
-      benefit2Desc:
-        'GIS, operations, maintenance, and planning all work on the same single source of truth.',
-      benefit3Title: 'Ready-to-use data',
-      benefit3Desc:
-        'Deliverables integrate seamlessly into your organization’s tools and databases.',
+      title: 'More efficiency to decide, plan, and operate',
+      benefit1: 'Faster asset surveys',
+      benefit2: 'Fewer field inspections',
+      benefit3: 'More reliable data',
+      benefit4: 'Better coordinated teams',
+      benefit5: 'Information ready to use',
       resultBadge: 'OUTCOME',
       resultTitle: 'Lower operational cost',
-      resultDesc: 'Maximize the efficiency of your team’s time and budget.',
     },
     ctaBanner: {
       title: 'Looking to reduce the cost of your field surveys?',

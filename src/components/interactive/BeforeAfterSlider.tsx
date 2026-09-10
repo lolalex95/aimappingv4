@@ -58,7 +58,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        className="relative h-[360px] sm:h-[460px] md:h-[520px] lg:h-[560px] xl:h-[600px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200 cursor-ew-resize bg-slate-900 touch-none select-none"
+        className="relative aspect-[3/2] max-h-[560px] lg:max-h-[580px] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200 cursor-ew-resize bg-slate-950 touch-none select-none"
         style={{ userSelect: 'none' }}
       >
         {/* RIGHT LAYER (DESPUÉS: Situación observada · AiMapping - Clipped to right of slider) */}
@@ -67,10 +67,10 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           style={{ clipPath: `polygon(${currentPosition}% 0, 100% 0, 100% 100%, ${currentPosition}% 100%)` }}
         >
           <img
-            src="./Assets/img/1/despues.png"
+            src="./Assets/img/1/Despues.jpg"
             alt="Detección automática de postes, luminarias y activos con inteligencia artificial y georreferenciación GIS en AiMapping"
             draggable={false}
-            className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover object-center select-none pointer-events-none"
           />
 
           {/* Right Bottom Label */}
@@ -84,16 +84,16 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           </div>
         </div>
 
-        {/* LEFT LAYER (ANTES: Imagen en crudo sin relevar - Clipped to left of slider with dark overlay) */}
+        {/* LEFT LAYER (ANTES: Imagen en crudo sin relevar - Clipped to left of slider) */}
         <div
           className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
           style={{ clipPath: `polygon(0 0, ${currentPosition}% 0, ${currentPosition}% 100%, 0 100%)` }}
         >
           <img
-            src="./Assets/img/1/antes.png"
+            src="./Assets/img/1/Antes.jpg"
             alt="Captura visual en campo sin procesar ni georreferenciar"
             draggable={false}
-            className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover object-center select-none pointer-events-none"
           />
 
           {/* Black semi-transparent overlay */}

@@ -218,11 +218,11 @@ export const ComoFuncionaVariant: React.FC = () => {
           </p>
         </div>
 
-        {/* Main Area: Left 60% (Video/Canvas) + Right 40% (Stepper) */}
-        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+        {/* Main Area: Left (Video/Canvas) + Right (Stepper) */}
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-center">
           
-          {/* LEFT 60% (lg:col-span-7): Video/Canvas Sequence */}
-          <div className="lg:col-span-7 order-2 lg:order-1 flex items-center justify-center relative">
+          {/* LEFT (lg:col-span-6): Video/Canvas Sequence */}
+          <div className="lg:col-span-6 order-2 lg:order-1 flex items-center justify-center relative">
             <div className="relative w-full aspect-video max-h-[460px] lg:max-h-[500px] flex items-center justify-center bg-transparent organic-video-mask overflow-hidden">
               
               {/* Step 1 Canvas */}
@@ -260,8 +260,8 @@ export const ComoFuncionaVariant: React.FC = () => {
             </div>
           </div>
 
-          {/* RIGHT 40% (lg:col-span-5): Stepper Vertical */}
-          <div className="lg:col-span-5 order-1 lg:order-2 flex flex-col justify-center">
+          {/* RIGHT (lg:col-span-6): Stepper Vertical */}
+          <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col justify-center">
 
             {/* 3 Horizontal Zones (Stage Name | Vertical Stepper | Content) */}
             <div className="flex flex-col">
@@ -272,10 +272,10 @@ export const ComoFuncionaVariant: React.FC = () => {
                 return (
                   <div
                     key={step.num}
-                    className="grid grid-cols-[105px_30px_1fr] sm:grid-cols-[120px_34px_1fr] items-start min-h-[88px] sm:min-h-[96px]"
+                    className="grid grid-cols-[90px_28px_1fr] sm:grid-cols-[105px_32px_1fr] lg:grid-cols-[95px_32px_1fr] xl:grid-cols-[110px_34px_1fr] items-start min-h-[96px] sm:min-h-[108px]"
                   >
                     {/* ZONE 1: Columna Izquierda — Nombre de la etapa (Justificado a la derecha) */}
-                    <div className="pt-0.5 select-none pr-3.5 text-right">
+                    <div className="pt-0.5 select-none pr-3 sm:pr-3.5 text-right">
                       <span
                         className={`font-mono text-xs sm:text-sm tracking-wider font-bold transition-colors duration-300 block ${
                           isActive
@@ -310,7 +310,7 @@ export const ComoFuncionaVariant: React.FC = () => {
 
                       {/* Línea vertical fija hacia el siguiente paso */}
                       {idx < stepsData.length - 1 && (
-                        <div className="w-[2px] h-14 sm:h-16 my-1 rounded-full relative overflow-hidden bg-slate-200 shrink-0">
+                        <div className="w-[2px] h-16 sm:h-20 my-1 rounded-full relative overflow-hidden bg-slate-200 shrink-0">
                           <div
                             className={`absolute inset-0 transition-all duration-500 ease-out ${
                               isDisactive
@@ -325,9 +325,9 @@ export const ComoFuncionaVariant: React.FC = () => {
                     </div>
 
                     {/* ZONE 3: Columna Derecha — Título y Copy del paso */}
-                    <div className="pt-0.5 pl-3.5 sm:pl-4">
+                    <div className="pt-0.5 pl-3 sm:pl-3.5 lg:pl-4">
                       <h3
-                        className={`text-base sm:text-lg lg:text-xl font-semibold tracking-tight leading-snug transition-colors duration-300 ${
+                        className={`text-sm sm:text-base lg:text-[1.06rem] xl:text-[1.12rem] font-semibold tracking-tight leading-snug transition-colors duration-300 xl:whitespace-nowrap ${
                           isActive
                             ? 'text-[#4F5051]'
                             : isDisactive
@@ -338,11 +338,11 @@ export const ComoFuncionaVariant: React.FC = () => {
                         {step.title}
                       </h3>
 
-                      {/* Subtítulo / Copy: Se desvanece suavemente sin empujar verticalmente los demás pasos */}
+                      {/* Subtítulo / Copy: Se desvanece suavemente con mayor separación visual */}
                       <div
                         className={`transition-all duration-300 ease-out overflow-hidden ${
                           isActive
-                            ? 'opacity-100 max-h-24 mt-1.5'
+                            ? 'opacity-100 max-h-24 mt-3 sm:mt-3.5'
                             : 'opacity-0 max-h-0 mt-0 pointer-events-none'
                         }`}
                       >

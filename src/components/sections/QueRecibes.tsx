@@ -224,19 +224,13 @@ export const QueRecibes: React.FC = () => {
 
           {/* RIGHT: Large Clean Image (No text overlays) */}
           <div data-reveal="fade-left" className="delay-150 lg:col-span-7 w-full flex items-center justify-center">
-            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9.5] rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xl shadow-slate-200/70 flex items-center justify-center">
+            <div className="relative w-full aspect-[1563/1006] rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xl shadow-slate-200/70 flex items-center justify-center">
               <img
                 key={currentItem.id}
                 src={currentItem.imageSrc}
                 alt={`Entregable GIS de activos georreferenciados - ${currentItem.title}: ${currentItem.subtitle}`}
                 className={`w-full h-full object-cover rounded-2xl transition-all duration-500 ease-out ${
-                  currentItem.id === 'imagen'
-                    ? isTransitioningImage
-                      ? 'opacity-40 scale-[1.315]'
-                      : 'opacity-100 scale-[1.30]'
-                    : isTransitioningImage
-                    ? 'opacity-40 scale-[1.015]'
-                    : 'opacity-100 scale-100'
+                  isTransitioningImage ? 'opacity-40 scale-[1.01]' : 'opacity-100 scale-100'
                 }`}
               />
             </div>

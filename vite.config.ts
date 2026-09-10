@@ -14,7 +14,16 @@ export default defineConfig({
     host: '127.0.0.1',
     port: 5173,
     watch: {
-      ignored: ['**/*.mp4', '**/*.zip', '**/*.pdf', '**/*.avi', '**/*.mov'],
+      ignored: [
+        '**/Assets/**',
+        '**/versio respaldo/**',
+        '**/dist/**',
+        '**/*.zip',
+        '**/*.mp4',
+        '**/*.pdf',
+        '**/*.avi',
+        '**/*.mov',
+      ],
     },
   },
 })
