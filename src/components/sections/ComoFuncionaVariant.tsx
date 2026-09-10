@@ -192,13 +192,14 @@ export const ComoFuncionaVariant: React.FC = () => {
           <span className="block text-[13px] font-semibold uppercase tracking-[0.5px] text-[#3CB4A3] mb-2 sm:mb-2.5 select-none">
             {language === 'en' ? 'HOW IT WORKS' : 'ASÍ FUNCIONA'}
           </span>
-          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#4F5051] tracking-tight leading-tight whitespace-nowrap">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#4F5051] tracking-tight leading-tight md:whitespace-nowrap">
             {language === 'en' ? (
               <>
                 From imagery to{' '}
                 <span className="bg-gradient-to-r from-[#3CB4A3] to-[#4F56A1] bg-clip-text text-transparent">
                   ready-to-use
                 </span>{' '}
+                <br className="block md:hidden" />
                 data
               </>
             ) : (
@@ -207,6 +208,7 @@ export const ComoFuncionaVariant: React.FC = () => {
                 <span className="bg-gradient-to-r from-[#3CB4A3] to-[#4F56A1] bg-clip-text text-transparent">
                   información
                 </span>{' '}
+                <br className="block md:hidden" />
                 lista para usar
               </>
             )}
