@@ -187,7 +187,7 @@ export const SemicircleCarousel: React.FC = () => {
           const distToApex = Math.abs(slotPos - 2);
           const isApexActive = distToApex < 0.25;
 
-          // Scale: Center is 1.15, sides are 0.92, outer is 0.65
+          // Scale: Center is 1.15 on desktop, sides are 0.92, outer is 0.65
           const scale = Math.max(0.65, 1.15 - distToApex * 0.22);
 
           // Opacity: Center & sides visible; smooth fade when sliding outside
@@ -220,15 +220,15 @@ export const SemicircleCarousel: React.FC = () => {
                 {isApexActive && (
                   <>
                     <span
-                      className="absolute w-24 h-24 sm:w-28 sm:h-28 rounded-full animate-ping opacity-40 pointer-events-none"
+                      className="absolute w-16 h-16 sm:w-28 sm:h-28 rounded-full animate-ping opacity-35 pointer-events-none"
                       style={{ backgroundColor: item.bgSoft }}
                     />
                     <span
-                      className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full border animate-pulse pointer-events-none"
-                      style={{ borderColor: item.brandColor, opacity: 0.45 }}
+                      className="absolute w-14 h-14 sm:w-24 sm:h-24 rounded-full border animate-pulse pointer-events-none"
+                      style={{ borderColor: item.brandColor, opacity: 0.4 }}
                     />
                     <span
-                      className="absolute w-28 h-28 sm:w-32 sm:h-32 rounded-full border pointer-events-none"
+                      className="absolute w-18 h-18 sm:w-32 sm:h-32 rounded-full border pointer-events-none"
                       style={{ borderColor: item.brandColor, opacity: 0.2 }}
                     />
                   </>
@@ -236,32 +236,37 @@ export const SemicircleCarousel: React.FC = () => {
 
                 {/* Outer Circular Container */}
                 <div
-                  className="relative rounded-full flex items-center justify-center transition-all duration-300"
+                  className={`relative rounded-full flex items-center justify-center transition-all duration-300 ${
+                    isApexActive
+                      ? 'w-13 h-13 sm:w-[4.85rem] sm:h-[4.85rem]'
+                      : 'w-10 h-10 sm:w-[3.85rem] sm:h-[3.85rem]'
+                  }`}
                   style={{
-                    width: isApexActive ? '4.85rem' : '3.85rem',
-                    height: isApexActive ? '4.85rem' : '3.85rem',
                     backgroundColor: isApexActive ? item.bgSoft : 'rgba(248, 250, 252, 0.95)',
                     boxShadow: isApexActive
-                      ? `0 12px 28px -4px ${item.brandColor}33, 0 0 0 8px ${item.ringColor}`
-                      : '0 4px 14px -2px rgba(0,0,0,0.06), 0 0 0 4px rgba(226, 232, 240, 0.85)',
+                      ? `0 8px 20px -4px ${item.brandColor}33, 0 0 0 4px ${item.ringColor}`
+                      : '0 2px 8px -2px rgba(0,0,0,0.06), 0 0 0 2px rgba(226, 232, 240, 0.85)',
                   }}
                 >
                   {/* Inner Icon Circle Badge */}
                   <div
-                    className="rounded-full flex items-center justify-center transition-all duration-300 bg-white"
+                    className={`rounded-full flex items-center justify-center transition-all duration-300 bg-white ${
+                      isApexActive
+                        ? 'w-9.5 h-9.5 sm:w-[3.5rem] sm:h-[3.5rem] border-[1.75px] sm:border-[2.5px]'
+                        : 'w-7.5 h-7.5 sm:w-[2.75rem] sm:h-[2.75rem] border-[1px] sm:border-[1.5px]'
+                    }`}
                     style={{
-                      width: isApexActive ? '3.5rem' : '2.75rem',
-                      height: isApexActive ? '3.5rem' : '2.75rem',
-                      borderWidth: isApexActive ? '2.5px' : '1.5px',
                       borderColor: isApexActive ? item.brandColor : 'rgba(203, 213, 225, 0.9)',
                       boxShadow: '0 2px 5px rgba(0,0,0,0.04)',
                     }}
                   >
                     <IconComponent
-                      className="transition-all duration-300"
+                      className={`transition-all duration-300 ${
+                        isApexActive
+                          ? 'w-5 h-5 sm:w-[1.85rem] sm:h-[1.85rem]'
+                          : 'w-3.5 h-3.5 sm:w-[1.35rem] sm:h-[1.35rem]'
+                      }`}
                       style={{
-                        width: isApexActive ? '1.85rem' : '1.35rem',
-                        height: isApexActive ? '1.85rem' : '1.35rem',
                         color: isApexActive ? item.brandColor : '#94A3B8',
                         strokeWidth: isApexActive ? 2.2 : 1.8,
                       }}
@@ -275,7 +280,7 @@ export const SemicircleCarousel: React.FC = () => {
       </div>
 
       {/* 3. Text container immediately below the center apex: Title + Subtitle */}
-      <div className="relative w-full max-w-xl mx-auto -mt-3 sm:-mt-6 text-center min-h-[72px] sm:min-h-[80px] flex items-center justify-center px-4 z-20">
+      <div className="relative w-full max-w-xl mx-auto mt-3 sm:-mt-6 text-center min-h-[76px] sm:min-h-[80px] flex items-center justify-center px-4 z-20">
         {items.map((item, index) => {
           const isCurrent = index === activeStep;
           return (
@@ -288,11 +293,11 @@ export const SemicircleCarousel: React.FC = () => {
               }`}
             >
               {/* Title */}
-              <h3 className="text-lg sm:text-2xl font-bold text-[#4F5051] tracking-tight leading-snug mb-1 sm:mb-1.5">
+              <h3 className="text-base sm:text-2xl font-bold text-[#4F5051] tracking-tight leading-snug mb-1 sm:mb-1.5">
                 {item.title}
               </h3>
               {/* Subtitle */}
-              <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-md mx-auto">
+              <p className="text-xs sm:text-base text-slate-600 font-normal leading-relaxed max-w-md mx-auto">
                 {item.subtitle}
               </p>
             </div>
