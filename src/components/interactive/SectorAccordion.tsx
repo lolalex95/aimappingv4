@@ -12,14 +12,17 @@ export const SectorAccordion: React.FC = () => {
       idleUrl: './Assets/img/6/telecomunicaciones-sf.jpg',
       activeUrl: './Assets/img/6/Telecomunicaciones.jpg',
       idlePosition: 'object-[15%_center]',
+      activePosition: 'object-center',
     },
     {
       id: 'energia',
       title: t.sectores.energiaTitle,
       description: t.sectores.energiaDesc,
-      idleUrl: './Assets/img/6/energia-sf.jpg',
-      activeUrl: './Assets/img/6/Energia.jpg',
+      idleUrl: './Assets/img/6/Energia sf (normal).jpg',
+      activeUrl: './Assets/img/6/Energia sf (hover).jpg',
       idlePosition: 'object-[18%_center]',
+      activePosition: 'object-[center_top]',
+      activeTransform: 'group-hover/article:scale-100 group-focus-within/article:scale-100',
     },
     {
       id: 'vial',
@@ -28,6 +31,8 @@ export const SectorAccordion: React.FC = () => {
       idleUrl: './Assets/img/6/infraestructura-sf.jpg',
       activeUrl: './Assets/img/6/infraestructura.jpg',
       idlePosition: 'object-center',
+      activePosition: 'object-[center_top]',
+      activeTransform: 'group-hover/article:scale-100 group-focus-within/article:scale-100',
     },
   ];
 
@@ -63,7 +68,7 @@ export const SectorAccordion: React.FC = () => {
 
             {/* 2. LAYER ACTIVO (Fotos con detección): Fade in al ponerse activo */}
             <img
-              className="object-cover h-72 md:h-[480px] w-full opacity-0 md:group-hover/article:opacity-100 md:group-focus-within/article:opacity-100 transition-all duration-700 ease-out transform group-hover/article:scale-105"
+              className={`object-cover ${item.activePosition || 'object-center'} h-72 md:h-[480px] w-full opacity-0 md:group-hover/article:opacity-100 md:group-focus-within/article:opacity-100 transition-all duration-700 ease-out transform ${item.activeTransform || 'group-hover/article:scale-105'}`}
               src={item.activeUrl}
               alt={`Detección automatizada con IA y georreferenciación GIS en ${item.title}`}
               loading="lazy"

@@ -79,7 +79,7 @@ export const PuntoPartidaVariant: React.FC = () => {
       {/* Ambient background accent glow */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] h-96 bg-gradient-to-b from-[#3CB4A3]/5 via-[#4F56A1]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      {/* 1. Header and Semicircle Nodes Container aligned with 86vw */}
+      {/* 1. Header and Curved Arc Container aligned with 86vw */}
       <div className="w-full max-w-[86vw] 2xl:max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
         
         {/* Section Header Centered & Full Width */}
@@ -90,7 +90,7 @@ export const PuntoPartidaVariant: React.FC = () => {
           </h2>
         </div>
 
-        {/* Animated 5-node curved carousel */}
+        {/* 3 nodes along curved arc simultaneously */}
         <SemicircleCarousel />
       </div>
 
