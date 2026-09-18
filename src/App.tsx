@@ -1,6 +1,7 @@
 import { Header } from './components/layout/Header';
 import { HeroSection } from './components/sections/HeroSection';
 import { PuntoPartidaVariant } from './components/sections/PuntoPartidaVariant';
+import { ProblemaTradicional } from './components/sections/ProblemaTradicional';
 import { ComoFuncionaVariant } from './components/sections/ComoFuncionaVariant';
 import { DemostracionVariant } from './components/sections/DemostracionVariant';
 import { QueRecibes } from './components/sections/QueRecibes';
@@ -24,6 +25,7 @@ export function App() {
         <Header />
         <main className="flex-grow">
           <HeroSection />
+          <ProblemaTradicional />
           <PuntoPartidaVariant />
           <ComoFuncionaVariant />
           <DemostracionVariant />

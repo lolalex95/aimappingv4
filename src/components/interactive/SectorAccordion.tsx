@@ -12,7 +12,8 @@ export const SectorAccordion: React.FC = () => {
       idleUrl: './Assets/img/6/telecomunicaciones-sf.jpg',
       activeUrl: './Assets/img/6/Telecomunicaciones.jpg',
       idlePosition: 'object-[15%_center]',
-      activePosition: 'object-center',
+      activePosition: 'object-[center_top]',
+      activeTransform: 'group-hover/article:scale-100 group-focus-within/article:scale-100',
     },
     {
       id: 'energia',

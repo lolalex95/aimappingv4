@@ -3,11 +3,10 @@ import { MapPin, Layers, Camera } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
 const availableFormats = [
-  { name: 'GeoJSON', ext: '.geojson' },
+  { name: 'GIS', ext: '.geojson' },
   { name: 'Shapefile', ext: '.shp' },
   { name: 'DXF', ext: '.dxf' },
   { name: 'DWG', ext: '.dwg' },
-  { name: 'ArcGIS', ext: '.gdb' },
   { name: 'CSV', ext: '.csv' },
 ];
 

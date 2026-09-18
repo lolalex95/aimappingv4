@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BeforeAfterSlider } from '../interactive/BeforeAfterSlider';
-import { SemicircleCarousel } from '../interactive/SemicircleCarousel';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../../context/LanguageContext';
@@ -73,31 +72,16 @@ export const PuntoPartidaVariant: React.FC = () => {
 
   return (
     <section
-      id="punto-de-partida"
-      className="py-20 md:py-28 bg-[#F8FAFC] border-t border-slate-200/80 overflow-hidden relative"
+      id="evidencia-comparativa"
+      className="py-16 md:py-24 bg-[#F8FAFC] border-t border-slate-200/80 overflow-hidden relative"
     >
       {/* Ambient background accent glow */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] h-96 bg-gradient-to-b from-[#3CB4A3]/5 via-[#4F56A1]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      {/* 1. Header and Curved Arc Container aligned with 86vw */}
-      <div className="w-full max-w-[86vw] 2xl:max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
-        
-        {/* Section Header Centered & Full Width */}
-        <div data-reveal="fade-up" className="w-full text-center mb-12 sm:mb-16">
-          {/* Title */}
-          <h2 className="text-2xl sm:text-4xl font-semibold text-[#4F5051] tracking-tight leading-tight max-w-4xl mx-auto">
-            {t.puntoPartida.title}
-          </h2>
-        </div>
-
-        {/* 3 nodes along curved arc simultaneously */}
-        <SemicircleCarousel />
-      </div>
-
-      {/* 2. Evidencia visual comparativa: Balanced 86vw Container */}
+      {/* Evidencia visual comparativa: Balanced 86vw Container */}
       <div
         ref={comparatorRef}
-        className="w-full max-w-[86vw] 2xl:max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 border-t border-slate-200/90 relative z-10"
+        className="w-full max-w-[86vw] 2xl:max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           

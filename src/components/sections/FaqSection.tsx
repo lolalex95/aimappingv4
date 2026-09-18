@@ -83,7 +83,7 @@ export const FaqSection: React.FC = () => {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="text-sm sm:text-base text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                    <div className="text-sm sm:text-base text-slate-600 leading-relaxed border-t border-slate-100 pt-4 whitespace-pre-line">
                       {faq.answer}
                     </div>
                   </div>
