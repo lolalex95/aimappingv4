@@ -31,7 +31,7 @@ export const ProblemaTradicional: React.FC = () => {
       text: t.problemaTradicional.card1,
       xPercent: 9.0,
       isAlternatedDown: false,
-      cardMaxWidth: 'max-w-[245px] xl:max-w-[270px]',
+      cardMaxWidth: 'max-w-[260px] xl:max-w-[300px]',
     },
     {
       id: 2,
@@ -39,7 +39,7 @@ export const ProblemaTradicional: React.FC = () => {
       text: t.problemaTradicional.card2,
       xPercent: 27.5,
       isAlternatedDown: true, // Drops DOWN on intermediate screens (< xl)
-      cardMaxWidth: 'max-w-[235px] xl:max-w-[260px]',
+      cardMaxWidth: 'max-w-[250px] xl:max-w-[290px]',
     },
     {
       id: 3,
@@ -55,7 +55,7 @@ export const ProblemaTradicional: React.FC = () => {
       text: t.problemaTradicional.card4,
       xPercent: 68.0,
       isAlternatedDown: true, // Drops DOWN on intermediate screens (< xl)
-      cardMaxWidth: 'whitespace-nowrap sm:max-w-[200px]',
+      cardMaxWidth: 'whitespace-nowrap',
     },
     {
       id: 5,
@@ -239,7 +239,7 @@ export const ProblemaTradicional: React.FC = () => {
                       <div
                         className={`bg-white px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl border border-slate-100 shadow-md group-hover:shadow-lg transition-all duration-300 ${item.cardMaxWidth}`}
                       >
-                        <p className="text-[12px] sm:text-[12.5px] xl:text-[13px] font-semibold text-[#4F5051] leading-snug">
+                        <p className="text-[13.5px] sm:text-[14px] xl:text-[15px] font-semibold text-[#4F5051] leading-snug">
                           {item.text}
                         </p>
                       </div>
@@ -282,7 +282,7 @@ export const ProblemaTradicional: React.FC = () => {
                       <div
                         className={`bg-white px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl border border-slate-100 shadow-md group-hover:shadow-lg transition-all duration-300 ${item.cardMaxWidth}`}
                       >
-                        <p className="text-[12px] sm:text-[12.5px] xl:text-[13px] font-semibold text-[#4F5051] leading-snug">
+                        <p className="text-[13.5px] sm:text-[14px] xl:text-[15px] font-semibold text-[#4F5051] leading-snug">
                           {item.text}
                         </p>
                       </div>
@@ -320,7 +320,7 @@ export const ProblemaTradicional: React.FC = () => {
                       <div
                         className={`bg-white px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl sm:rounded-2xl border border-slate-100 shadow-md group-hover:shadow-lg transition-all duration-300 ${item.cardMaxWidth}`}
                       >
-                        <p className="text-[12px] sm:text-[12.5px] xl:text-[13px] font-semibold text-[#4F5051] leading-snug">
+                        <p className="text-[13.5px] sm:text-[14px] xl:text-[15px] font-semibold text-[#4F5051] leading-snug">
                           {item.text}
                         </p>
                       </div>
@@ -349,7 +349,7 @@ export const ProblemaTradicional: React.FC = () => {
                   <IconComp className="w-5 h-5 stroke-[2.2]" />
                 </div>
                 {/* Text */}
-                <p className="text-xs sm:text-sm font-semibold text-[#4F5051] leading-snug">
+                <p className="text-sm sm:text-base font-semibold text-[#4F5051] leading-snug">
                   {item.text}
                 </p>
               </div>
