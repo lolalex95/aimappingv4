@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
 export const SectorAccordion: React.FC = () => {
   const { t, language } = useLanguage();
   const [activeId, setActiveId] = useState<string | null>(null);
+  const cardRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
   const sectorItems = [
     {
@@ -38,6 +39,62 @@ export const SectorAccordion: React.FC = () => {
     },
   ];
 
+  // Detección automática al hacer scroll en Mobile (< 768px):
+  // Cuando una tarjeta llega a la zona media de la pantalla, cambia automáticamente a la imagen con IA
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScrollOrResize = () => {
+      // En desktop (>= 768px) no aplicamos activación por scroll (usa hover por CSS)
+      if (window.innerWidth >= 768) {
+        if (activeId !== null) {
+          setActiveId(null);
+        }
+        return;
+      }
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const viewportCenter = window.innerHeight / 2;
+          let closestId: string | null = null;
+          let minDistance = Infinity;
+
+          Object.entries(cardRefs.current).forEach(([id, el]) => {
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            // Solo evaluar si la tarjeta está visible en la ventana
+            if (rect.bottom > 0 && rect.top < window.innerHeight) {
+              const cardCenter = rect.top + rect.height / 2;
+              const distance = Math.abs(cardCenter - viewportCenter);
+
+              // Si el centro de la tarjeta está en la zona media (franja de lectura activa)
+              if (distance < minDistance && distance < rect.height * 0.7) {
+                minDistance = distance;
+                closestId = id;
+              }
+            }
+          });
+
+          if (closestId && closestId !== activeId) {
+            setActiveId(closestId);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+    window.addEventListener('resize', handleScrollOrResize, { passive: true });
+    // Verificación inicial por si alguna tarjeta ya está en el centro
+    handleScrollOrResize();
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollOrResize);
+      window.removeEventListener('resize', handleScrollOrResize);
+    };
+  }, [activeId]);
+
   return (
     <div className="w-full my-6 select-none">
       <div className="group/container flex flex-col md:flex-row justify-center gap-3.5 w-full mx-auto">
@@ -46,17 +103,28 @@ export const SectorAccordion: React.FC = () => {
           return (
             <article
               key={item.id}
+              ref={(el) => {
+                cardRefs.current[item.id] = el;
+              }}
               tabIndex={0}
               onClick={() => setActiveId((prev) => (prev === item.id ? null : item.id))}
-              className={`group/article relative w-full md:flex-1 md:hover:flex-[3.5] md:focus-within:flex-[3.5] rounded-2xl overflow-hidden cursor-pointer transition-[flex] duration-500 ease-[cubic-bezier(.4,0,.2,1)] before:absolute before:inset-0 before:bg-gradient-to-t before:from-slate-950/80 before:via-slate-950/20 before:to-transparent before:z-10 after:absolute after:inset-0 after:bg-slate-950/15 after:backdrop-blur-[0.5px] after:transition-opacity duration-300 md:group-hover/container:after:opacity-40 hover:after:!opacity-0 focus-within:after:!opacity-0 hover:ring-2 hover:ring-[#3CB4A3] focus-within:ring-2 focus-within:ring-[#3CB4A3] shadow-xl ${
-                isActive ? 'ring-2 ring-[#3CB4A3] after:!opacity-0' : ''
+              className={`group/article relative w-full md:flex-1 md:hover:flex-[3.5] md:focus-within:flex-[3.5] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] before:absolute before:inset-0 before:bg-gradient-to-t before:from-slate-950/80 before:via-slate-950/20 before:to-transparent before:z-10 after:absolute after:inset-0 after:bg-slate-950/15 after:backdrop-blur-[0.5px] after:transition-opacity duration-300 md:group-hover/container:after:opacity-40 hover:after:!opacity-0 focus-within:after:!opacity-0 hover:ring-2 hover:ring-[#3CB4A3] focus-within:ring-2 focus-within:ring-[#3CB4A3] shadow-xl ${
+                isActive
+                  ? 'ring-2 ring-[#3CB4A3] shadow-[0_10px_30px_rgba(60,180,163,0.28)] after:!opacity-0'
+                  : ''
               }`}
             >
-              {/* Badge indicador interactivo para Mobile */}
-              <div className="md:hidden absolute top-3.5 right-3.5 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/20 text-xs font-semibold text-white tracking-wide shadow-lg transition-all duration-300">
+              {/* Badge indicador dinámico para Mobile */}
+              <div
+                className={`md:hidden absolute top-3.5 right-3.5 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-md border text-xs font-semibold tracking-wide shadow-lg transition-all duration-300 ${
+                  isActive
+                    ? 'bg-slate-950/85 border-[#3CB4A3]/50 text-white'
+                    : 'bg-slate-950/60 border-white/15 text-slate-200'
+                }`}
+              >
                 <span
                   className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                    isActive ? 'bg-[#3CB4A3] animate-pulse' : 'bg-white/60'
+                    isActive ? 'bg-[#3CB4A3] animate-pulse' : 'bg-white/50'
                   }`}
                 />
                 <span>
@@ -65,8 +133,8 @@ export const SectorAccordion: React.FC = () => {
                       ? 'AI Detection'
                       : 'Detección IA'
                     : language === 'en'
-                    ? 'Tap to inspect'
-                    : 'Toca para ver IA'}
+                    ? 'Original'
+                    : 'Foto original'}
                 </span>
               </div>
 
@@ -86,17 +154,17 @@ export const SectorAccordion: React.FC = () => {
               {/* 1. LAYER INACTIVO (Fotos SF / Normal): Con encuadre desplazado hacia la izquierda */}
               <img
                 className={`absolute inset-0 object-cover ${item.idlePosition || 'object-center'} h-full w-full ${
-                  isActive ? 'opacity-0' : 'opacity-100'
-                } md:group-hover/article:opacity-0 md:group-focus-within/article:opacity-0 transition-all duration-700 ease-out transform group-hover/article:scale-105`}
+                  isActive ? 'opacity-0 scale-100' : 'opacity-100 scale-[1.01]'
+                } md:group-hover/article:opacity-0 md:group-focus-within/article:opacity-0 transition-all duration-700 ease-out transform`}
                 src={item.idleUrl}
                 alt={`Relevamiento de activos e infraestructura en ${item.title} - Registro visual`}
                 loading="lazy"
               />
 
-              {/* 2. LAYER ACTIVO (Fotos con detección / Hover): Fade in al ponerse activo o al hacer tap en mobile */}
+              {/* 2. LAYER ACTIVO (Fotos con detección / Hover): Fade in al ponerse activo en el centro del scroll */}
               <img
                 className={`object-cover ${item.activePosition || 'object-center'} h-72 md:h-[480px] w-full ${
-                  isActive ? '!opacity-100' : 'opacity-0'
+                  isActive ? '!opacity-100 scale-100' : 'opacity-0 scale-[1.01]'
                 } md:group-hover/article:opacity-100 md:group-focus-within/article:opacity-100 transition-all duration-700 ease-out transform ${
                   item.activeTransform || 'group-hover/article:scale-105'
                 }`}
