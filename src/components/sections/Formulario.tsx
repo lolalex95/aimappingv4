@@ -4,7 +4,7 @@ import confetti from 'canvas-confetti';
 import { useLanguage } from '../../context/LanguageContext';
 
 export const Formulario: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const [formData, setFormData] = useState({
     nombreCompleto: '',
@@ -21,7 +21,7 @@ export const Formulario: React.FC = () => {
 
   const sectorsList = t.formulario.sectorsList;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.nombreCompleto || !formData.empresa || !formData.email || !formData.necesidad || !formData.sector) {
       setErrorMsg(t.formulario.errorRequired);
@@ -31,16 +31,52 @@ export const Formulario: React.FC = () => {
     setErrorMsg('');
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#3CB4A3', '#4F56A1', '#BFBFBF'],
+    try {
+      const response = await fetch('https://formspree.io/f/xbdqqlle', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: formData.nombreCompleto,
+          empresa: formData.empresa,
+          telefono: formData.telefono || 'No especificado',
+          email: formData.email,
+          sector: formData.sector,
+          necesidad: formData.necesidad,
+          _subject: `Nuevo contacto web AiMapping - ${formData.nombreCompleto} (${formData.empresa})`,
+        }),
       });
-    }, 900);
+
+      if (response.ok) {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#3CB4A3', '#4F56A1', '#BFBFBF'],
+        });
+      } else {
+        const data = await response.json().catch(() => null);
+        const apiError = data?.errors?.map((item: { message: string }) => item.message).join(', ') || data?.error;
+        setErrorMsg(
+          apiError ||
+            (language === 'es'
+              ? 'Hubo un inconveniente al enviar la solicitud. Por favor, intenta de nuevo.'
+              : 'There was a problem submitting your request. Please try again.')
+        );
+        setIsSubmitting(false);
+      }
+    } catch {
+      setErrorMsg(
+        language === 'es'
+          ? 'Error de conexión. Por favor, revisa tu conexión a internet e inténtalo nuevamente.'
+          : 'Network error. Please check your internet connection and try again.'
+      );
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -138,6 +174,9 @@ export const Formulario: React.FC = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Honeypot field for anti-spam */}
+                  <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
                   {errorMsg && (
                     <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold">
                       {errorMsg}
@@ -152,6 +191,7 @@ export const Formulario: React.FC = () => {
                       </label>
                       <input
                         id="form-nombre"
+                        name="nombre"
                         type="text"
                         required
                         value={formData.nombreCompleto}
@@ -167,6 +207,7 @@ export const Formulario: React.FC = () => {
                       </label>
                       <input
                         id="form-empresa"
+                        name="empresa"
                         type="text"
                         required
                         value={formData.empresa}
@@ -177,37 +218,39 @@ export const Formulario: React.FC = () => {
                     </div>
                   </div>
 
-                    {/* Row 2: Teléfono & Email corporativo */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label htmlFor="form-telefono" className="block text-sm font-semibold text-slate-300 mb-1.5">
-                          {t.formulario.phoneField}
-                        </label>
-                        <input
-                          id="form-telefono"
-                          type="tel"
-                          value={formData.telefono}
-                          onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                          placeholder={t.formulario.phonePlaceholder}
-                          className="w-full px-4 py-3 rounded-xl bg-[#192233] border border-white/10 focus:border-[#3CB4A3] focus:ring-2 focus:ring-[#3CB4A3]/20 text-sm text-white placeholder:text-slate-500 outline-none transition-all"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="form-email" className="block text-sm font-semibold text-slate-300 mb-1.5">
-                          {t.formulario.emailField}
-                        </label>
-                        <input
-                          id="form-email"
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder={t.formulario.emailPlaceholder}
-                          className="w-full px-4 py-3 rounded-xl bg-[#192233] border border-white/10 focus:border-[#3CB4A3] focus:ring-2 focus:ring-[#3CB4A3]/20 text-sm text-white placeholder:text-slate-500 outline-none transition-all"
-                        />
-                      </div>
+                  {/* Row 2: Teléfono & Email corporativo */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="form-telefono" className="block text-sm font-semibold text-slate-300 mb-1.5">
+                        {t.formulario.phoneField}
+                      </label>
+                      <input
+                        id="form-telefono"
+                        name="telefono"
+                        type="tel"
+                        value={formData.telefono}
+                        onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+                        placeholder={t.formulario.phonePlaceholder}
+                        className="w-full px-4 py-3 rounded-xl bg-[#192233] border border-white/10 focus:border-[#3CB4A3] focus:ring-2 focus:ring-[#3CB4A3]/20 text-sm text-white placeholder:text-slate-500 outline-none transition-all"
+                      />
                     </div>
+
+                    <div>
+                      <label htmlFor="form-email" className="block text-sm font-semibold text-slate-300 mb-1.5">
+                        {t.formulario.emailField}
+                      </label>
+                      <input
+                        id="form-email"
+                        name="email"
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder={t.formulario.emailPlaceholder}
+                        className="w-full px-4 py-3 rounded-xl bg-[#192233] border border-white/10 focus:border-[#3CB4A3] focus:ring-2 focus:ring-[#3CB4A3]/20 text-sm text-white placeholder:text-slate-500 outline-none transition-all"
+                      />
+                    </div>
+                  </div>
 
                   {/* Row 3: Sector de infraestructura */}
                   <div>
@@ -216,6 +259,7 @@ export const Formulario: React.FC = () => {
                     </label>
                     <select
                       id="form-sector"
+                      name="sector"
                       required
                       value={formData.sector}
                       onChange={(e) => setFormData({ ...formData, sector: e.target.value })}
@@ -239,6 +283,7 @@ export const Formulario: React.FC = () => {
                     </label>
                     <textarea
                       id="form-necesidad"
+                      name="necesidad"
                       required
                       rows={4}
                       value={formData.necesidad}

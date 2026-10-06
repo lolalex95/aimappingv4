@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head><title>Extract Poster</title></head>
+<body>
+  <video id="vid" src="/Assets/Vids/hero/herobg.mp4" muted playsinline crossorigin="anonymous"></video>
+  <canvas id="cvs"></canvas>
+  <div id="status">Loading...</div>
+  <script>
+    const vid = document.getElementById('vid');
+    const cvs = document.getElementById('cvs');
+    const status = document.getElementById('status');
+
+    vid.addEventListener('loadeddata', () => {
+      vid.currentTime = 0.5;
+    });
+
+    vid.addEventListener('seeked', () => {
+      cvs.width = vid.videoWidth || 1920;
+      cvs.height = vid.videoHeight || 1080;
+      const ctx = cvs.getContext('2d');
+      ctx.drawImage(vid, 0, 0, cvs.width, cvs.height);
+      const dataUrl = cvs.toDataURL('image/webp', 0.85);
+      
+      fetch('/save_poster', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: dataUrl })
+      })
+      .then(res => res.text())
+      .then(t => {
+        status.innerText = 'SUCCESS: ' + t;
+      })
+      .catch(e => {
+        status.innerText = 'ERROR: ' + e.message;
+      });
+    });
+
+    vid.load();
+  </script>
+</body>
+</html>
